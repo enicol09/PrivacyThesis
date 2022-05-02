@@ -102,7 +102,6 @@ const routes = [
   { path: "@", redirect: '/' } //otherwise redirect to home 
 ]
 
-
 const router = new VueRouter({
   routes
 })

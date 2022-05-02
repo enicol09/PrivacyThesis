@@ -381,7 +381,7 @@
             hide-details
           ></v-checkbox>
         </v-card>
-        <v-btn color="primary" @click="backtomenu()"> Continue </v-btn>
+        <v-btn color="primary" @click="backtomenu()"> Cancel </v-btn>
 
         <v-btn text @click="push_to_db()"> Save </v-btn>
       </v-stepper-content>
@@ -444,6 +444,7 @@ export default {
         previousSelectionEntity: "",
         selectedItemswhere: "",
         previousSelectionwhere: "",
+        user: "",
       },
       e1: 1,
       snackbarKey: 0, // notifications
@@ -474,9 +475,10 @@ export default {
     push_to_db() {
       var t = this;
       var user_id = JSON.stringify(this.$store.getters.currUser.uid);
+      this.policy.user = user_id;
       t.$firebase.db
         .collection("policies")
-        .doc(user_id)
+        .doc()
         .set(this.policy)
         .then((Result) => {
           console.log("result: " + Result);

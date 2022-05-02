@@ -29,7 +29,18 @@
           height="280px"
           width="350px"
           class="ma-2"
-          color="info"
+          color="primary"
+          @click="pol = 'pol'"
+          to="/policyr"
+        >
+          Create template and download it
+        </v-btn>
+
+        <v-btn
+          height="280px"
+          width="350px"
+          class="ma-2"
+          color="grey white--text"
           @click="pol = 'pol'"
           to="/policyr"
         >
