@@ -546,6 +546,11 @@ export default {
   // methodos p en na elegxi ean to state ine null -> simple generator -> create
   // ean oi ean to ibject den einai numm ->this.policy =  this.4store.editUPdate
   methods: {
+    creation_time() {
+      if (this.$store.getters.editUpdatePolicy != null) {
+        this.policy = this.$store.getters.editUpdatePolicy;
+      }
+    },
     backtomenu() {
       var t = this;
       t.$router.push("/menu").catch((error) => {
@@ -593,6 +598,9 @@ export default {
         this.e1 = 2;
       }
     },
+  },
+  created() {
+    this.creation_time();
   },
   // created: (){
   //kalo to function dame //update to db

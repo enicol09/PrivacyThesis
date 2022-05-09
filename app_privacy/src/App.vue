@@ -75,11 +75,11 @@
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
 
-          <v-list-item @click="login = !login" to="/signIn">
+          <v-list-item @click="logout()" to="/">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Account</v-list-item-title>
+            <v-list-item-title>Log out</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -105,5 +105,16 @@ export default {
       { title: "Tutorial", icon: "mdi-help-box", to: "/about" },
     ],
   }),
+  methods: {
+    logout() {
+      this.$store.commit("setUser", null);
+      this.$store.commit("setEditUpdatePolicy", null);
+      this.$router.push("/").catch((error) => {
+        // error was removed
+        console.log(error.message);
+        //  console.log("i am here 4")
+      });
+    },
+  },
 };
 </script>

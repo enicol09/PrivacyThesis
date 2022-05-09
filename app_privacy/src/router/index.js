@@ -131,8 +131,6 @@ const routes = [
       }
     },
   },
-
-  { path: "@", redirect: '/' } //otherwise redirect to home 
 ]
 
 const router = new VueRouter({
@@ -141,13 +139,3 @@ const router = new VueRouter({
 
 
 export default router
-
-// router.beforeEnter((to, from, next) => {
-//   const currentUser = firebase.auth().currentUser;
-//   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-
-  // if (requiresAuth && !currentUser) {
-  //     const loginpath = window.location.pathname;
-  //     next({ name: 'main', query: { from: loginpath } });
-  // } else if (!requiresAuth && currentUser) next('menu');
-

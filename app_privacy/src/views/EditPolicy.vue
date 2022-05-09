@@ -79,8 +79,8 @@
                         <v-icon
                           color="light-blue darken-2"
                           @click="
-                            editPolicie = true;
                             policieItem = item;
+                            editpolicy();
                           "
                           right
                           dark
@@ -390,6 +390,20 @@ export default {
       this.deleteDialog = false;
       this.deleteName = "";
       this.deleteId = "";
+    },
+
+    editpolicy() {
+      this.$store.commit("setEditUpdatePolicy", this.policieItem);
+      console.log(this.$store.getters.editUpdatePolicy);
+      this.$router.push("/generator").catch((error) => {
+        // error was removed
+        console.log(error.message);
+        //  console.log("i am here 4")
+      });
+
+      //tiponeitasostagenika
+      //tora prepei na fortoso to state
+      //je na pao stin alli pleura
     },
     // read documents by id
     readDocumentsByUserId(collection, dataObject) {
