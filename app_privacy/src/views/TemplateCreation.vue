@@ -24,7 +24,7 @@
             >
               <!-- // * policies / ADD ROOM -->
               <div class="d-flex align-center">
-                <div class="pb-1 text-center heading5">
+                <div class="pb-1 text-center display-1">
                   Privacy Policies Template Creation
                 </div>
                 <v-spacer />
@@ -277,6 +277,7 @@ class POLICIEFORM {
     this.firstName = firstName;
   }
 }
+
 import PoliciePopUp from "@/components/policypopup.vue";
 import VueHtml2pdf from "vue-html2pdf";
 export default {

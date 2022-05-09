@@ -201,14 +201,8 @@
             <v-card-actions class="">
               <v-spacer></v-spacer>
               <v-btn class="secondary" @click="noAction()"> No</v-btn>
-              <v-btn
-                class="secondary"
-                @click="
-                  deleteSpace(policiesForm.id, policiesForm.spaceName),
-                    yesAction()
-                "
-                >Yes</v-btn
-              >
+              <v-btn class="secondary" @click="yesAction()">Yes </v-btn>
+              <deletepolicy :policy="policieItem" />
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -268,10 +262,11 @@ class POLICIEFORM {
   }
 }
 import PoliciePopUp from "@/components/policypopup.vue";
-
+import deletepolicy from "@/components/deletepolicypopup.vue";
 export default {
   components: {
     PoliciePopUp,
+    deletepolicy,
   },
   data() {
     return {

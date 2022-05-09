@@ -1,18 +1,14 @@
-<template>
-  <v-row class="justify-center secondary" no-gutters>
-    {{ policy.user }}
-  </v-row>
-</template>
-
+this.deletepoli();
 <script>
 export default {
-  name: "PolicyPopUp",
+  name: "deletepolicy",
   components: {},
   props: {
     policy: Object,
   },
   data() {
     return {
+      policyid: "",
       array: [],
       itemPerRoomArray: [],
     };
@@ -20,7 +16,15 @@ export default {
   watch: {},
   computed: {},
 
-  methods: {},
+  methods: {
+    deletepoli() {
+      var policy = this.policy.id;
+      console.log(JSON.stringify(policy));
+      var t = this;
+      t.$firebase.db.collection("policies").doc(policy).delete();
+    },
+  },
+
   created() {},
   mounted() {},
 };
