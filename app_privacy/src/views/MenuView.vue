@@ -31,7 +31,7 @@
           class="ma-2"
           color="primary"
           @click="pol = 'pol'"
-          to="/policyr"
+          to="/template"
         >
           Create template and download it
         </v-btn>

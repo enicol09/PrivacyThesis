@@ -383,7 +383,77 @@
         </v-card>
         <v-btn color="primary" @click="backtomenu()"> Cancel </v-btn>
 
-        <v-btn text @click="push_to_db()"> Save </v-btn>
+        <v-dialog v-model="dialog" persistent max-width="600px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn text v-bind="attrs" v-on="on"> Save </v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">Name your Policy</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    Give Policy Name:
+                    <v-text-field
+                      prepend-icon="mdi-tooltip-edit"
+                      label="Policy Name"
+                      required
+                      v-model="policy.policyname"
+                    ></v-text-field>
+
+                    Give Current Date:
+                    <v-menu
+                      ref="menu"
+                      v-model="menu"
+                      :close-on-content-click="false"
+                      :return-value.sync="policy.date"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="policy.date"
+                          label="Picker in menu"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker v-model="policy.date" no-title scrollable>
+                        <v-spacer></v-spacer>
+                        <v-btn text color="primary" @click="menu = false">
+                          Cancel
+                        </v-btn>
+                        <v-btn
+                          text
+                          color="primary"
+                          @click="$refs.menu.save(policy.date)"
+                        >
+                          OK
+                        </v-btn>
+                      </v-date-picker>
+                    </v-menu>
+                  </v-col>
+                </v-row></v-container
+              >
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="dialog = false">
+                Close
+              </v-btn>
+              <v-btn color="blue darken-1" text @click="push_to_db()">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
+        <!-- <v-btn text @click="push_to_db()"> Save </v-btn> -->
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -445,7 +515,16 @@ export default {
         selectedItemswhere: "",
         previousSelectionwhere: "",
         user: "",
+        policyname: "",
+        date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+          .toISOString()
+          .substr(0, 10),
       },
+
+      menu: false,
+      modal: false,
+      menu2: false,
+      dialog: false,
       e1: 1,
       snackbarKey: 0, // notifications
       snackbar: {},
@@ -458,13 +537,14 @@ export default {
         "Social Media Site",
         "Other",
       ],
-
       //*VALIDATION RULES*//
       countryRules: [(v) => !!v || "Country is required"],
       FieldRules: [(v) => !!v || "This field is required"],
     };
   },
 
+  // methodos p en na elegxi ean to state ine null -> simple generator -> create
+  // ean oi ean to ibject den einai numm ->this.policy =  this.4store.editUPdate
   methods: {
     backtomenu() {
       var t = this;
@@ -514,5 +594,8 @@ export default {
       }
     },
   },
+  // created: (){
+  //kalo to function dame //update to db
+  // }
 };
 </script>

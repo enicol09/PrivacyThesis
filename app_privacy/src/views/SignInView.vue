@@ -36,7 +36,7 @@
                 ></v-text-field>
               </v-form>
 
-              <div><details-saved :user="email" password="password" /></div>
+              <!-- <div><details-saved :user="email" password="password" /></div> -->
               <v-btn
                 class="rounded-0"
                 color="#000000"
@@ -46,26 +46,35 @@
                 @click="loginUser()"
                 >Login
               </v-btn>
-              <div><details-saved :user="email" :password="password" /></div>
+              <!-- <div><details-saved :user="email" :password="password" /></div> -->
               <v-card-actions class="text--secondary">
-                <v-checkbox color="#000000" label="Remember me"></v-checkbox>
+                <router-link
+                  :to="{ name: 'forgotPassword' }"
+                  class="hover:underline"
+                  >Forgot password?</router-link
+                >
+
                 <v-spacer></v-spacer>
                 <!-- <router-link :to="{ name: 'SignUp' }">Sign Up</router-link> -->
-                No account?
-                <a href="#" class="pl-2" style="color: #000000">Sign Up</a>
+                No account? <a> </a>
+                <v-btn
+                  class="rounded-0"
+                  color="blue"
+                  small
+                  text
+                  dark
+                  @click="signUser()"
+                  >Sign Up
+                </v-btn>
               </v-card-actions>
             </v-card-text>
             <v-card-actions class="ml-6 mr-6 text-center">
               <p>
-                By continuing, you agree to PrivacyUi's<a
-                  href="#"
-                  class="pl-2"
-                  style="color: #000000"
+                By continuing, you agree to PrivacyUi's
+                <router-link :to="{ name: 'policyr' }" class="hover:underline"
+                  >Policy</router-link
                 >
-                  Policy</a
-                >
-                and
-                <a href="#" class="pl-2" style="color: #000000">Terms of Use</a>
+                and Terms of Use
               </p>
             </v-card-actions>
           </v-card>
@@ -172,6 +181,26 @@ export default {
         ); // update snack bar with error
         this.snackbarKey++;
       }
+    },
+
+    signUser() {
+      var t = this;
+
+      t.$router.push("/signup").catch((error) => {
+        // error was removed
+        console.log(error.message);
+        //  console.log("i am here 4")
+      });
+    },
+
+    readPolicy() {
+      var t = this;
+
+      t.$router.push("/privacy").catch((error) => {
+        // error was removed
+        console.log(error.message);
+        //  console.log("i am here 4")
+      });
     },
   },
 };

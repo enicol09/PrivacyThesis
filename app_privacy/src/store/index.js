@@ -7,8 +7,12 @@ export default new Vuex.Store({
   state: {
     currUser: null,
     userEmail: null,
+    editUpdatePolicy: null,
   },
   getters: {
+    editUpdatePolicy(state) {
+      return state.editUpdatePolicy;
+    },
     currUser(state) {
       // console.log("")
       return state.currUser;
@@ -22,6 +26,9 @@ export default new Vuex.Store({
     setUser(state, payload) {
       state.currUser = payload;
       //console.log("setUser: " + JSON.stringify(state.currUser))
+    },
+    setEditUpdatePolicy(state, payload) {
+      state.editUpdatePolicy = payload;
     },
   },
   actions: {

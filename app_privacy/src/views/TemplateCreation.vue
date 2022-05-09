@@ -24,7 +24,9 @@
             >
               <!-- // * policies / ADD ROOM -->
               <div class="d-flex align-center">
-                <div class="pb-1 text-center display-1">Privacy Policies</div>
+                <div class="pb-1 text-center display-1">
+                  Privacy Policies Template Creation
+                </div>
                 <v-spacer />
                 <v-btn class="secondary" @click="formAction('Add', '')"
                   >Add New Policy</v-btn
@@ -56,23 +58,6 @@
                   :search="search"
                   mobile-breakpoint="0"
                 >
-                  <template v-slot:[`item.delete`]="{ item }">
-                    <div class="d-flex justify-end">
-                      <div style="width: 50px !important">
-                        <v-icon
-                          color="light-blue darken-2"
-                          @click="
-                            deleteDialog = true;
-                            policieItem = item;
-                          "
-                          right
-                          dark
-                        >
-                          mdi-delete</v-icon
-                        >
-                      </div>
-                    </div>
-                  </template>
                   <template v-slot:[`item.actions`]="{ item }">
                     <div class="d-flex justify-end">
                       <div style="width: 50px !important">
@@ -90,6 +75,7 @@
                       </div>
                     </div>
                   </template>
+                  <SurveyPopUp />
                 </v-data-table>
               </v-card>
             </v-col>
@@ -189,11 +175,11 @@
         >
           <v-card class="gold">
             <v-card-title class="background black--text">
-              Delete Policy
+              Delete Survey
             </v-card-title>
             <v-card-text class="mt-6">
               <p class="subtitle1 black--text">
-                Are you sure you want to delete this policy
+                Are you sure you want to delete the room
                 <strong>{{ deleteName }}</strong
                 >?
               </p></v-card-text
@@ -201,14 +187,7 @@
             <v-card-actions class="">
               <v-spacer></v-spacer>
               <v-btn class="secondary" @click="noAction()"> No</v-btn>
-              <v-btn
-                class="secondary"
-                @click="
-                  deleteSpace(policiesForm.id, policiesForm.spaceName),
-                    yesAction()
-                "
-                >Yes</v-btn
-              >
+              <v-btn class="secondary" @click="yesAction()">Yes</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -219,11 +198,24 @@
           hide-overlay
           transition="dialog-bottom-transition"
         >
-          <v-card class="background">
-            <v-toolbar dark color=" gold heading5 indigo--text">
-              <v-icon class="display-1 indigo--text">icons8-truck</v-icon
-              ><v-spacer></v-spacer> Preview Policy <v-spacer></v-spacer>
-              <v-btn> DownlOadn </v-btn>
+          <v-card class="white">
+            <v-toolbar color="pb-1 text-center display-1">
+              <v-avatar :tile="true">
+                <v-img
+                  :src="require('@/assets/elia.png')"
+                  alt="logo"
+                  max-height="200px"
+                  max-width="200px"
+                ></v-img> </v-avatar
+              >User-Friendly Policy Representation<v-spacer></v-spacer>
+              <v-btn class="ma-2 white--text" rounded color="primary">
+                Download Policy
+              </v-btn>
+
+              <v-btn class="ma-2 white--text" rounded color="primary">
+                Print Policy
+              </v-btn>
+
               <v-icon class="indigo--text" @click="editPolicie = false"
                 >mdi-close</v-icon
               >
@@ -317,15 +309,7 @@ export default {
         },
 
         {
-          text: "Delete Policy",
-          value: "delete",
-          align: "end",
-
-          hidden: false,
-        },
-
-        {
-          text: "Edit Policy",
+          text: "Create Template",
           value: "actions",
           align: "end",
 
@@ -387,9 +371,17 @@ export default {
       this.deleteId = id;
     },
     async yesAction() {
-      console.log(JSON.stringify(this.deleteId));
-      this.deleteDialog = false;
-      this.showForm = false;
+      var result = await this.deleteDocument("survey", this.deleteId); // delete venue through mixins
+      if (result.code === 1) {
+        this.snackbar = new SNACKBAR(true, "success", "Survey deleted", 2000); // update snack bar with succes
+        this.snackbarKey++;
+        this.deleteDialog = false;
+        this.showForm = false;
+        this.readDocuments("survey", "policies");
+      } else {
+        this.deleteDialog = false;
+        this.showForm = false;
+      }
     },
     noAction() {
       this.deleteDialog = false;
