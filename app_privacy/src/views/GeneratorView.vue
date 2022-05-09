@@ -109,7 +109,7 @@
           class="mb-10"
           color="grey lighten-4"
           align-content="center"
-          height="650px"
+          height="750px"
         >
           <div></div>
           <v-row>
@@ -381,11 +381,10 @@
             hide-details
           ></v-checkbox>
         </v-card>
-        <v-btn color="primary" @click="backtomenu()"> Cancel </v-btn>
 
         <v-dialog v-model="dialog" persistent max-width="600px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn text v-bind="attrs" v-on="on"> Save </v-btn>
+            <v-btn color="primary" v-bind="attrs" v-on="on"> Save </v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -452,7 +451,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-
+        <v-btn color="primary" text @click="backtomenu()"> Cancel </v-btn>
         <!-- <v-btn text @click="push_to_db()"> Save </v-btn> -->
       </v-stepper-content>
     </v-stepper-items>
