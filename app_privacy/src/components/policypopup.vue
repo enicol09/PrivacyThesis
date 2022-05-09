@@ -1,8 +1,10 @@
 <template>
-  <v-row class="justify-center secondary" no-gutters>
-    {{ policy.user }}
-    ola kala tora edo tha bgenei to omorfo user-friendly policy
-  </v-row>
+  <div id="printSection">
+    <v-row class="justify-center secondary" no-gutters>
+      {{ policy.user }}
+      ola kala tora edo tha bgenei to omorfo user-friendly policy
+    </v-row>
+  </div>
 </template>
 
 <script>

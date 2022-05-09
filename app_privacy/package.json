@@ -9,8 +9,11 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "firebase": "^8.9.1",
+    "jspdf": "^2.5.1",
     "moment": "^2.29.3",
     "vue": "^2.6.14",
+    "vue-html-to-paper": "^1.4.4",
+    "vue-html2pdf": "^1.8.0",
     "vue-router": "^3.5.1",
     "vuetify": "^2.6.0",
     "vuex": "^3.6.2"

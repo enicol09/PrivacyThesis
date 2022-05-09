@@ -24,7 +24,7 @@
             >
               <!-- // * policies / ADD ROOM -->
               <div class="d-flex align-center">
-                <div class="pb-1 text-center display-1">
+                <div class="pb-1 text-center heading5">
                   Privacy Policies Template Creation
                 </div>
                 <v-spacer />
@@ -199,7 +199,7 @@
           transition="dialog-bottom-transition"
         >
           <v-card class="white">
-            <v-toolbar color="pb-1 text-center display-1">
+            <v-toolbar color="pb-1 text-center heading1">
               <v-avatar :tile="true">
                 <v-img
                   :src="require('@/assets/elia.png')"
@@ -208,19 +208,37 @@
                   max-width="200px"
                 ></v-img> </v-avatar
               >User-Friendly Policy Representation<v-spacer></v-spacer>
-              <v-btn class="ma-2 white--text" rounded color="primary">
+              <v-btn
+                class="ma-2 white--text"
+                rounded
+                color="primary"
+                @click="printDownload"
+              >
                 Download Policy
               </v-btn>
 
-              <v-btn class="ma-2 white--text" rounded color="primary">
-                Print Policy
+              <v-btn
+                class="ma-2 white--text"
+                rounded
+                color="primary"
+                @click="printSection"
+              >
+                <v-icon small class="mr-1">mdi-print</v-icon>Print Policy
               </v-btn>
 
               <v-icon class="indigo--text" @click="editPolicie = false"
                 >mdi-close</v-icon
               >
             </v-toolbar>
-
+            <VueHtml2pdf
+              :manual-pagination="true"
+              :enable-download="true"
+              ref="DownloadComp"
+            >
+              <section slot="pdf-content">
+                <PoliciePopUp :policy="policieItem" />
+              </section>
+            </VueHtml2pdf>
             <PoliciePopUp :policy="policieItem" />
             <v-divider></v-divider>
           </v-card>
@@ -260,10 +278,11 @@ class POLICIEFORM {
   }
 }
 import PoliciePopUp from "@/components/policypopup.vue";
-
+import VueHtml2pdf from "vue-html2pdf";
 export default {
   components: {
     PoliciePopUp,
+    VueHtml2pdf,
   },
   data() {
     return {
@@ -322,6 +341,9 @@ export default {
   },
 
   methods: {
+    printSection() {
+      this.$htmlToPaper("printSection");
+    },
     formAction(action, item) {
       this.formType = action;
       if (action === "Add") {
@@ -405,6 +427,10 @@ export default {
           });
           this[dataObject] = data;
         });
+    },
+
+    printDownload() {
+      this.$refs.DownloadComp.generatePdf();
     },
   },
   create() {
