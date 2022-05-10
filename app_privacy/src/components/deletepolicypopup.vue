@@ -1,4 +1,7 @@
-this.deletepoli();
+<template>
+  <div>{{ this.deletepoli() }}</div>
+</template>
+
 <script>
 export default {
   name: "deletepolicy",
@@ -19,13 +22,14 @@ export default {
   methods: {
     deletepoli() {
       var policy = this.policy.id;
-      console.log(JSON.stringify(policy));
+      console.log("Elia");
       var t = this;
       t.$firebase.db.collection("policies").doc(policy).delete();
     },
   },
-
-  created() {},
+  created() {
+    //this.deletepoli();
+  },
   mounted() {},
 };
 </script>

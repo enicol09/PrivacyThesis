@@ -101,7 +101,7 @@
         </v-card>
         <v-btn color="primary" @click="continue_step_one()">Continue</v-btn>
 
-        <v-btn text to="/menu"> Cancel </v-btn>
+        <v-btn text @click="remove()"> Cancel </v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="2">
@@ -214,7 +214,7 @@
         </v-card>
         <v-btn color="primary" @click="e1 = 3"> Continue </v-btn>
 
-        <v-btn text> Cancel </v-btn>
+        <v-btn text @click="remove()"> Cancel </v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="3">
@@ -341,7 +341,7 @@
 
         <v-btn color="primary" @click="e1 = 4"> Continue </v-btn>
 
-        <v-btn text> Cancel </v-btn>
+        <v-btn @click="remove()" text> Cancel </v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="4">
@@ -545,37 +545,85 @@ export default {
   // methodos p en na elegxi ean to state ine null -> simple generator -> create
   // ean oi ean to ibject den einai numm ->this.policy =  this.4store.editUPdate
   methods: {
-    creation_time() {
-      if (this.$store.getters.editUpdatePolicy != null) {
-        this.policy = this.$store.getters.editUpdatePolicy;
-      }
+    setnull() {
+      console.log("elias");
+      this.policy.id = "";
+      this.policy.th_web = "";
+      this.policy.th_email = "";
+      this.policy.th_mail = "";
+      this.policy.th_phone = "";
+      this.policy.first_name = "";
+      this.policy.last_name = "";
+      this.policy.zip = "";
+      this.policy.media = "";
+      this.policy.address = "";
+      this.policy.email_c = "";
+      this.policy.country = "";
+      this.policy.weburl = "";
+      this.policy.webname = "";
+      this.policy.phone = "";
+      this.policy.other = "";
+      this.policy.yes_remarketing = "";
+      this.policy.no_remarketing = "";
+      this.policy.st_other = "";
+      this.policy.st_copy = "";
+      this.policy.yes_payp = "";
+      this.policy.no_payp = "";
+      this.policy.st_database = "";
+      this.policy.yes_comm = "";
+      this.policy.no_comm = "";
+      this.policy.yes_email = "";
+      this.policy.no_emails = "";
+      this.policy.yes_ads = "";
+      this.policy.no_ads = "";
+      this.policy.yes_analytics = "";
+      this.policy.no_analytics = "";
+      this.policy.selectionEntity = "";
+      this.policy.previousSelectionEntity = "";
+      this.policy.selectedItemswhere = "";
+      this.policy.previousSelectionwhere = "";
+      this.policy.user = "";
+      this.policy.policyname = "";
     },
+
     backtomenu() {
       var t = this;
+      this.setnull();
+      this.$store.commit("setEditUpdatePolicy", this.policy);
       t.$router.push("/menu").catch((error) => {
         console.log(error.message);
       });
     },
     push_to_db() {
-      var t = this;
-      var user_id = JSON.stringify(this.$store.getters.currUser.uid);
-      this.policy.user = user_id;
-      t.$firebase.db
-        .collection("policies")
-        .doc()
-        .set(this.policy)
-        .then((Result) => {
-          console.log("result: " + Result);
-        })
-        .catch((err) => {
-          console.log(err);
+      if (this.policy.id == "") {
+        var t = this;
+        var user_id = JSON.stringify(this.$store.getters.currUser.uid);
+        this.policy.user = user_id;
+        t.$firebase.db
+          .collection("policies")
+          .doc()
+          .set(this.policy)
+          .then((Result) => {
+            console.log("result: " + Result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        this.remove();
+
+        // * redirect user to homepage
+
+        t.$router.push("/menu").catch((error) => {
+          console.log(error.message);
         });
-
-      // * redirect user to homepage
-
-      t.$router.push("/menu").catch((error) => {
-        console.log(error.message);
-      });
+      } else {
+        console.log(this.policy.id);
+        this.$firebase.db
+          .collection("policies")
+          .doc(this.policy.id)
+          .update(this.policy);
+      }
     },
 
     continue_step_one() {
@@ -597,12 +645,26 @@ export default {
         this.e1 = 2;
       }
     },
+
+    creation_time() {
+      console.log(this.$store.getters.editUpdatePolicy);
+      if (this.$store.getters.editUpdatePolicy != null) {
+        this.policy = this.$store.getters.editUpdatePolicy;
+      }
+    },
+    remove() {
+      var t = this;
+      this.setnull();
+      console.log(this.policy);
+      this.$store.commit("setEditUpdatePolicy", this.policy);
+      t.$router.push("/menu").catch((error) => {
+        console.log(error.message);
+      });
+    },
   },
+
   created() {
     this.creation_time();
   },
-  // created: (){
-  //kalo to function dame //update to db
-  // }
 };
 </script>

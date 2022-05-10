@@ -223,7 +223,7 @@
                 color="primary"
                 @click="printSection"
               >
-                <v-icon small class="mr-1">mdi-print</v-icon>Print Policy
+                Print Policy
               </v-btn>
 
               <v-icon class="indigo--text" @click="editPolicie = false"
@@ -277,7 +277,6 @@ class POLICIEFORM {
     this.firstName = firstName;
   }
 }
-
 import PoliciePopUp from "@/components/policypopup.vue";
 import VueHtml2pdf from "vue-html2pdf";
 export default {
@@ -388,6 +387,7 @@ export default {
         }
       }
     },
+
     deleteSpace(id, name) {
       this.deleteDialog = true;
       this.deleteName = name;

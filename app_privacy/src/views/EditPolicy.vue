@@ -62,8 +62,8 @@
                         <v-icon
                           color="light-blue darken-2"
                           @click="
-                            deleteDialog = true;
                             policieItem = item;
+                            deleteDialog = true;
                           "
                           right
                           dark
@@ -79,8 +79,8 @@
                         <v-icon
                           color="light-blue darken-2"
                           @click="
-                            editPolicie = true;
                             policieItem = item;
+                            editpolicy();
                           "
                           right
                           dark
@@ -193,17 +193,17 @@
             </v-card-title>
             <v-card-text class="mt-6">
               <p class="subtitle1 black--text">
-                Are you sure you want to delete this policy
-                <strong>{{ deleteName }}</strong
-                >?
+                Are you sure you want to delete this policy?
               </p></v-card-text
             >
             <v-card-actions class="">
               <v-spacer></v-spacer>
               <v-btn class="secondary" @click="noAction()"> No</v-btn>
               <v-btn class="secondary" @click="yesAction()">Yes </v-btn>
-              <deletepolicy :policy="policieItem" />
             </v-card-actions>
+            <div v-if="itsyes === 'yes'">
+              <deletepolicy :policy="policieItem" />
+            </div>
           </v-card>
         </v-dialog>
         <v-dialog
@@ -263,6 +263,7 @@ class POLICIEFORM {
 }
 import PoliciePopUp from "@/components/policypopup.vue";
 import deletepolicy from "@/components/deletepolicypopup.vue";
+
 export default {
   components: {
     PoliciePopUp,
@@ -273,6 +274,7 @@ export default {
       snackbarKey: 0, // notifications
       snackbar: {}, //notifications
       search: "",
+      itsyes: "",
       editPolicie: false,
       deleteDialog: false,
       deleteName: "",
@@ -385,6 +387,8 @@ export default {
       console.log(JSON.stringify(this.policieItem));
       this.deleteDialog = false;
       this.showForm = false;
+      this.itsyes = "yes";
+      console.log(this.itsyes);
     },
     noAction() {
       this.deleteDialog = false;
@@ -408,6 +412,20 @@ export default {
           });
           this[dataObject] = data;
         });
+    },
+
+    editpolicy() {
+      this.$store.commit("setEditUpdatePolicy", this.policieItem);
+      console.log(this.$store.getters.editUpdatePolicy);
+      this.$router.push("/generator").catch((error) => {
+        // error was removed
+        console.log(error.message);
+        //  console.log("i am here 4")
+      });
+
+      //tiponeitasostagenika
+      //tora prepei na fortoso to state
+      //je na pao stin alli pleura
     },
   },
   create() {
