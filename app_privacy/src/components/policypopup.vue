@@ -1,96 +1,187 @@
 <template>
-  <div id="printSection">
-    <v-main>
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center" dense>
-          <v-card width="1200" color="light-grey">
-            <v-img height="200px" src="@/assets/blue_b.jpg">
-              <v-app-bar class="mt-9 md-4" flat color="rgba(0, 0, 0, 0)">
-                <v-avatar size="100">
-                  <img alt="user" src="@/assets/logo_t.png" />
-                </v-avatar>
+  <v-main>
+    <div>{{ policy.id }}</div>
+    <div id="app">
+      <dashboard :id="'dashExample'">
+        <dash-layout
+          v-for="layout in dlayouts"
+          v-bind="layout"
+          :debug="true"
+          :key="layout.breakpoint"
+        >
+          <dash-item v-for="item in layout.items" v-bind="item" :key="item.id">
+            <div class="content">skase</div>
 
-                <v-spacer></v-spacer>
-              </v-app-bar>
-
-              <v-card-title class="white--black mt-3">
-                <p class="ml-3 display-1">Elia Nicolaou</p>
-              </v-card-title>
-            </v-img>
-
-            <v-card-text>
-              <div class="font-weight-bold ml-3 black--text mb-2">Details</div>
-
-              <v-list two-line>
-                <v-list-item>
-                  <v-list-item-icon>
-                    <v-icon color="light-blue darken-2"> mdi-phone </v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title>00 357 96862363</v-list-item-title>
-                    <v-list-item-subtitle>Mobile</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-divider inset></v-divider>
-
-                <v-list-item href="https://www.google.com/gmail/about/">
-                  <v-list-item-icon>
-                    <v-icon color="light-blue darken-2"> mdi-email </v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title
-                      >enicol09@ucy.ac.cy.com</v-list-item-title
-                    >
-                    <v-list-item-subtitle>Email</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-
-                <v-divider inset></v-divider>
-
-                <v-list-item href="https://www.ucy.ac.cy/en/">
-                  <v-list-item-icon>
-                    <v-icon color="light-blue darken-2">
-                      mdi-map-marker
-                    </v-icon>
-                  </v-list-item-icon>
-
-                  <v-list-item-content>
-                    <v-list-item-title>University of Cyprus</v-list-item-title>
-                    <v-list-item-subtitle>Online</v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card-text>
-          </v-card>
-        </v-row>
-      </v-container>
-    </v-main>
-  </div>
+            <template v-slot:resizeBottomRight>
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 30 30"
+                focusable="false"
+                role="img"
+                alt="icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#42b983"
+                class="b-icon bi bi-arrow-down-right mx-auto"
+                data-v-11c9e491
+              >
+                <g data-v-11c9e491>
+                  <path
+                    fill-rule="evenodd"
+                    d="M14 9.5a.5.5 0 01.5.5v5a.5.5 0 01-.5.5H9a.5.5 0 010-1h4.5V10a.5.5 0 01.5-.5z"
+                    clip-rule="evenodd"
+                  ></path>
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.646 5.646a.5.5 0 01.708 0l9 9a.5.5 0 01-.708.708l-9-9a.5.5 0 010-.708z"
+                    clip-rule="evenodd"
+                  ></path>
+                </g>
+              </svg>
+            </template>
+          </dash-item>
+        </dash-layout>
+      </dashboard>
+    </div>
+  </v-main>
 </template>
 
 <script>
+import { Dashboard, DashLayout, DashItem } from "vue-responsive-dash";
+
 export default {
-  name: "PolicyPopUp",
-  components: {},
+  name: "App",
+  components: {
+    Dashboard,
+    DashLayout,
+    DashItem,
+  },
   props: {
     policy: Object,
   },
   data() {
     return {
-      array: [],
-      itemPerRoomArray: [],
+      dlayouts: [
+        {
+          breakpoint: "xl",
+          numberOfCols: 12,
+          items: [
+            {
+              id: "1",
+              x: 0,
+              y: 0,
+              width: 1,
+              height: 1,
+            },
+            { id: "2", x: 1, y: 0, width: 2, height: 1 },
+            { id: "3", x: 0, y: 1, width: 2, height: 1 },
+            { id: "4", x: 3, y: 0, width: 2, height: 2 },
+            { id: "5", x: 5, y: 0, width: 1, height: 2 },
+            { id: "6", x: 6, y: 0, width: 2, height: 1 },
+            { id: "7", x: 7, y: 1, width: 5, height: 1 },
+          ],
+        },
+        {
+          breakpoint: "lg",
+          breakpointWidth: 1200,
+          numberOfCols: 10,
+          items: [
+            {
+              id: "1",
+              x: 0,
+              y: 0,
+              width: 1,
+              height: 1,
+            },
+            { id: "2", x: 1, y: 0, width: 2, height: 1 },
+            { id: "3", x: 0, y: 1, width: 2, height: 1 },
+            { id: "4", x: 3, y: 0, width: 2, height: 2 },
+            { id: "5", x: 5, y: 0, width: 1, height: 2 },
+            { id: "6", x: 6, y: 0, width: 2, height: 1 },
+            { id: "7", x: 7, y: 1, width: 3, height: 1 },
+          ],
+        },
+        {
+          breakpoint: "md",
+          breakpointWidth: 996,
+          numberOfCols: 8,
+          items: [
+            {
+              id: "1",
+              x: 0,
+              y: 0,
+              width: 1,
+              height: 1,
+            },
+            { id: "2", x: 1, y: 0, width: 2, height: 1 },
+            { id: "3", x: 0, y: 1, width: 2, height: 1 },
+            { id: "4", x: 3, y: 0, width: 2, height: 2 },
+            { id: "5", x: 5, y: 0, width: 1, height: 2 },
+            { id: "6", x: 6, y: 0, width: 2, height: 1 },
+            { id: "7", x: 7, y: 1, width: 1, height: 1 },
+          ],
+        },
+        {
+          breakpoint: "sm",
+          breakpointWidth: 768,
+          numberOfCols: 4,
+          items: [
+            {
+              id: "1",
+              x: 0,
+              y: 0,
+              width: 1,
+              height: 1,
+            },
+            { id: "2", x: 1, y: 0, width: 2, height: 1 },
+            { id: "3", x: 0, y: 1, width: 2, height: 1 },
+            { id: "4", x: 3, y: 0, width: 1, height: 2 },
+            { id: "5", x: 2, y: 1, width: 1, height: 1 },
+          ],
+        },
+        {
+          breakpoint: "xs",
+          breakpointWidth: 480,
+          numberOfCols: 2,
+          items: [
+            {
+              id: "1",
+              x: 0,
+              y: 0,
+              width: 1,
+              height: 1,
+            },
+            { id: "2", x: 1, y: 0, width: 1, height: 1 },
+            { id: "3", x: 0, y: 1, width: 2, height: 1 },
+          ],
+        },
+        {
+          breakpoint: "xxs",
+          breakpointWidth: 0,
+          numberOfCols: 1,
+          items: [
+            {
+              id: "1",
+              x: 0,
+              y: 0,
+              width: 1,
+              height: 1,
+            },
+            { id: "2", x: 0, y: 1, width: 1, height: 1 },
+          ],
+        },
+      ],
     };
   },
-  watch: {},
-  computed: {},
-
-  methods: {},
-  created() {},
-  mounted() {},
 };
 </script>
+
 <style>
+.content {
+  height: 100%;
+  width: 100%;
+  border: 2px solid #42b983;
+  border-radius: 5px;
+  background-color: #42b9833d;
+}
 </style>

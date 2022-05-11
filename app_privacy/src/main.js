@@ -3,8 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
-
+import VueDashboard from 'vue-dashboard-vd';
 import VueHtmlToPaper from "vue-html-to-paper";
+import vueresponsive from "vue-responsive-dash";;
 
 import Vuetify from "vuetify";
 
@@ -29,7 +30,10 @@ const options = {
 };
 
 Vue.use(VueHtmlToPaper, options);
+Vue.use(vueresponsive);
 
+
+Vue.use(VueDashboard);
 Vue.use(Vuetify);
 Vue.config.productionTip = false
 
