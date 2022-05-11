@@ -24,7 +24,9 @@
             >
               <!-- // * policies / ADD ROOM -->
               <div class="d-flex align-center">
-                <div class="pb-1 text-center display-1">Privacy Policies</div>
+                <div class="pb-1 text-center display-1">
+                  Editing Privacy Policies
+                </div>
                 <v-spacer />
                 <v-btn class="secondary" @click="formAction('Add', '')"
                   >Add New Policy</v-btn

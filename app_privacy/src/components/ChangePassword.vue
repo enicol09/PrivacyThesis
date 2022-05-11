@@ -11,7 +11,7 @@
               height="200"
             ></v-img>
             <h1 class="text-center mb-4 font-bold text-lg">
-              Forgot Password? Please Enter
+              Change Password? Please Check if the email is right
             </h1>
             <article class="md:w-1/3 p-5 border rounded bg-gray-100 mx-auto">
               <transition name="fade">
@@ -42,7 +42,11 @@
                     :rules="emailRules"
                   ></v-text-field>
                 </div>
-                <div class="mb-4">
+                <h5>
+                  An email will be sent to your email, in order to reset your
+                  password. Please select:
+                </h5>
+                <div class="mt-3 mb-4">
                   <button
                     type="submit"
                     @click="sendEmail"
@@ -77,7 +81,7 @@ import firebase from "firebase";
 export default {
   data() {
     return {
-      email: "",
+      email: null,
       error: null,
       emailSending: false,
 
@@ -106,6 +110,11 @@ export default {
           this.error = error.message;
         });
     },
+  },
+
+  created() {
+    this.email = this.$store.getters.currUser.email;
+    console.log(this.email);
   },
 };
 </script>

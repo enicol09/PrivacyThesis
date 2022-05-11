@@ -11,7 +11,7 @@
       </v-avatar>
       <!-- <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> -->
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-      <v-toolbar-title> PrivacyUI </v-toolbar-title>
+      <v-toolbar-title> UIpolicy </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
         text

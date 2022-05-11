@@ -7,6 +7,7 @@ import TutorialView from '../views/TutorialView.vue'
 import ContactView from '../views/ContactView.vue'
 import TemplateCreation from '../views/TemplateCreation.vue'
 import ForgotPassword from "@/components/ForgotPassword";
+import ChangePassword from "@/components/ChangePassword";
 import deletepolicy from "@/components/deletepolicypopup";
 Vue.use(VueRouter)
 
@@ -123,14 +124,14 @@ const routes = [
     path: "/forgot-password",
     name: "forgotPassword",
     component: ForgotPassword,
-    beforeEnter(to, from, next) {
-      const user = firebase.auth().currentUser;
-      if (user) {
-        next({ name: "dashboard" });
-      } else {
-        next();
-      }
-    },
+
+  },
+
+  {
+    path: "/change-password",
+    name: "changePassword",
+    component: ChangePassword,
+
   },
 
   { path: "@", redirect: '/' } //otherwise redirect to home 

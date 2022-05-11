@@ -22,7 +22,7 @@
           @click="edit = 'edit'"
           to="/edit"
         >
-          Edit an old privacy policy
+          Edit a privacy policy
         </v-btn>
 
         <v-btn
@@ -44,7 +44,7 @@
           @click="pol = 'pol'"
           to="/policyr"
         >
-          See what a prolicy must have
+          Account Settings
         </v-btn>
       </div>
     </v-row>

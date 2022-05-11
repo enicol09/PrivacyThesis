@@ -143,6 +143,20 @@
           </v-card> </v-col
       ></v-row>
     </v-container>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animate__animated animate__fadeIn"
+      leave-active-class="animate__animated animate__fadeOut"
+      mode="out-in"
+    >
+      <appsnackbar
+        :status="snackbar.status"
+        :color="snackbar.color"
+        :timeout="snackbar.timeout"
+        :message="snackbar.message"
+        :key="snackbarKey"
+      />
+    </transition>
   </v-main>
 </template>
 
@@ -257,7 +271,7 @@ export default {
                 console.log("result: " + Result);
               })
               .catch((err) => {
-                console.log(err);
+                t.snackbar = new SNACKBAR(true, "error", err, 5000);
               });
             var currUser = t.$firebase.auth.currentUser;
             currUser
@@ -265,19 +279,18 @@ export default {
               .then(function () {})
               .catch(function (error) {
                 // ! verification email error
-                console.log("send verification email error: " + error);
+                t.snackbar = new SNACKBAR(true, "error", err, 5000);
               });
             // * redirect user to homepage
 
             t.$router.push("/signIn").catch((error) => {
-              console.log(error.message);
+              t.snackbar = new SNACKBAR(true, "error", err, 5000);
             });
           })
           .catch((err) => {
             // ! firebase registering error
             t.registerErrorMessage = err;
-            console.log("firebase registering error: " + err);
-            t.snackbar = new SNACKBAR(true, "error", err, 500); // update snack bar with error
+            t.snackbar = new SNACKBAR(true, "error", err, 5000); // update snack bar with error
             t.snackbarKey++;
           });
       }, 1000);

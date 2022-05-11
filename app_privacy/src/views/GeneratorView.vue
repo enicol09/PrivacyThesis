@@ -623,6 +623,14 @@ export default {
           .collection("policies")
           .doc(this.policy.id)
           .update(this.policy);
+
+        this.remove();
+
+        // * redirect user to homepage
+
+        t.$router.push("/menu").catch((error) => {
+          console.log(error.message);
+        });
       }
     },
 

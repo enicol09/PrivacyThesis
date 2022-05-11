@@ -70,7 +70,7 @@
             </v-card-text>
             <v-card-actions class="ml-6 mr-6 text-center">
               <p>
-                By continuing, you agree to PrivacyUi's
+                By continuing, you agree to UIpolicy's
                 <router-link :to="{ name: 'policyr' }" class="hover:underline"
                   >Policy</router-link
                 >

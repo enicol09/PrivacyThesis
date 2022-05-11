@@ -16,7 +16,7 @@
                   Introducing
                 </h1>
                 <div class="text-left mt-4">
-                  <h2 class="display-4 font-weight-bold">PrivacyUI</h2>
+                  <h2 class="display-4 font-weight-bold">UIpolicy</h2>
                 </div>
 
                 <div class="text-left mt-4">
