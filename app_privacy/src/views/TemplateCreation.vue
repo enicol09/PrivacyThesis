@@ -198,7 +198,7 @@
           hide-overlay
           transition="dialog-bottom-transition"
         >
-          <v-card class="white">
+          <v-card class="white" height="1000">
             <v-toolbar color="pb-1 text-center heading1">
               <v-avatar :tile="true">
                 <v-img

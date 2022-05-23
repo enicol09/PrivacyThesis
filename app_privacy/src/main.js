@@ -14,9 +14,19 @@ import "vuetify/dist/vuetify.min.css";
 import moment from 'moment';
 Vue.prototype.$moment = moment;
 
+
+import { DashboardLayoutComponent, DashboardLayoutPlugin } from '@syncfusion/ej2-vue-layouts';
+
+Vue.component(DashboardLayoutPlugin.name, DashboardLayoutComponent);
+
 import AppSnackbar from './components/AppSnackbar.vue';
 Vue.component('appsnackbar', AppSnackbar);
 
+import VueLodash from 'vue-lodash'
+import lodash from 'lodash'
+
+
+Vue.use(VueLodash, { name: 'custom', lodash: lodash })
 // * FIREBASE INTEGRATION
 const firebase = require("./firebase/firebase-config.js"); // Import Firebase Config for Firebase Object Access
 Vue.prototype.$firebase = firebase; // Prototype Firebase for use throughout Project $firebase
