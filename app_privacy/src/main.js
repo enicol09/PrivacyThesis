@@ -14,11 +14,6 @@ import "vuetify/dist/vuetify.min.css";
 import moment from 'moment';
 Vue.prototype.$moment = moment;
 
-
-import { DashboardLayoutComponent, DashboardLayoutPlugin } from '@syncfusion/ej2-vue-layouts';
-
-Vue.component(DashboardLayoutPlugin.name, DashboardLayoutComponent);
-
 import AppSnackbar from './components/AppSnackbar.vue';
 Vue.component('appsnackbar', AppSnackbar);
 
