@@ -8,7 +8,8 @@ import VueHtmlToPaper from "vue-html-to-paper";
 import vueresponsive from "vue-responsive-dash";;
 
 import Vuetify from "vuetify";
-
+import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
+Vue.component('vue-sidebar-menu-akahon', VueSidebarMenuAkahon);
 import "vuetify/dist/vuetify.min.css";
 
 import moment from 'moment';

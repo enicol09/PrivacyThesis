@@ -109,7 +109,7 @@
           class="mb-10"
           color="grey lighten-4"
           align-content="center"
-          height="750px"
+          height="850px"
         >
           <div></div>
           <v-row>
@@ -143,6 +143,7 @@
                   value="Email Address"
                   hide-details
                 ></v-checkbox>
+
                 <v-checkbox
                   v-model="policy.phone"
                   label="Phone"
@@ -179,6 +180,20 @@
                   hide-details
                 ></v-checkbox>
 
+                <div v-if="policy.other">
+                  <h3 class="pt-3 pa-1">Please specify other</h3>
+                  <v-text-field
+                    v-model="policy.otherspec"
+                    type="Other data"
+                    label="Other data"
+                    persistent-hint
+                    background-color="white"
+                    outlined
+                    required
+                    :rules="FieldRules"
+                  ></v-text-field>
+                </div>
+
                 <h3 class="pt-3 pa-1">
                   Do you user any tracking-analytics tools, such as Google
                   Analytics?
@@ -207,121 +222,160 @@
       </v-stepper-content>
 
       <v-stepper-content step="3">
-        <v-card class="mb-12" color="grey lighten-4" height="1050px">
-          <h2 class="pa-1 blue--text">How you use your users' data:</h2>
-          <h3 class="pt-3 pa-1">Do you show relating ads?</h3>
-          <v-checkbox
-            v-model="policy.yes_ads"
-            label="Yes, we do"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="policy.no_ads"
-            label="No, we are not"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
+        <v-card class="mb-12" color="grey lighten-4" height="1500px">
+          <v-row>
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-flex align-self-center sm8 class="pa-2">
+                <h2 class="pa-1 blue--text">How you use your users' data:</h2>
+                <h3 class="pt-3 pa-1">Do you show relating ads?</h3>
+                <v-checkbox
+                  v-model="policy.yes_ads"
+                  label="Yes, we do"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="policy.no_ads"
+                  label="No, we are not"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
 
-          <h3 class="pt-3 pa-1">Do you send any emails to the users?</h3>
-          <v-checkbox
-            v-model="policy.yes_email"
-            label="Yes, we do sent emails"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="policy.no_emails"
-            label="No, we are not"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
+                <h3 class="pt-3 pa-1">Do you send any emails to the users?</h3>
+                <v-checkbox
+                  v-model="policy.yes_email"
+                  label="Yes, we do sent emails"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="policy.no_emails"
+                  label="No, we are not"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
 
-          <h3 class="pt-3 pa-1">
-            Do you use user's personal data for commercial?
-          </h3>
-          <v-checkbox
-            v-model="policy.yes_comm"
-            label="Yes, we do use them"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="policy.no_comm"
-            label="No, we are not"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
+                <h3 class="pt-3 pa-1">
+                  Do you use user's personal data for commercial?
+                </h3>
+                <v-checkbox
+                  v-model="policy.yes_comm"
+                  label="Yes, we do use them"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="policy.no_comm"
+                  label="No, we are not"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
 
-          <h3 class="pt-3 pa-1">Can users pay for any products or services?</h3>
-          <v-checkbox
-            v-model="policy.yes_payp"
-            label="Yes, they can"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="policy.no_payp"
-            label="No, they can not"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
+                <h3 class="pt-3 pa-1">
+                  Can users pay for any products or services?
+                </h3>
+                <v-checkbox
+                  v-model="policy.yes_payp"
+                  label="Yes, they can"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="policy.no_payp"
+                  label="No, they can not"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
 
-          <h3 class="pt-3 pa-1">How do you store user's data?</h3>
-          <v-checkbox
-            v-model="policy.st_database"
-            label="Database"
-            color="blue"
-            value="db"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="policy.st_copy"
-            label="Copy Files "
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="policy.st_other"
-            label="Other "
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
+                <h3 class="pt-3 pa-1">How do you store user's data?</h3>
+                <v-checkbox
+                  v-model="policy.st_database"
+                  label="Database"
+                  color="blue"
+                  value="db"
+                  hide-details
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="policy.st_copy"
+                  label="Copy Files "
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="policy.st_other"
+                  label="Other "
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
 
-          <h3 class="pt-3 pa-1">Do you use remarketing services?</h3>
-          <v-checkbox
-            v-model="policy.yes_remarketing"
-            label="Yes, we do"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="policy.no_remarketing"
-            label="No, we do not "
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
+                <h3 class="pt-3 pa-1">Do you use remarketing services?</h3>
+                <v-checkbox
+                  v-model="policy.yes_remarketing"
+                  label="Yes, we do"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="policy.no_remarketing"
+                  label="No, we do not "
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
 
-          <h3 class="pt-3 pa-1">Do you use cookies?</h3>
-          <v-checkbox
-            v-model="policy.cookies"
-            label="Yes, we do use cookies"
-            color="blue"
-            value="Other"
-            hide-details
-          ></v-checkbox>
+                <h3 class="pt-3 pa-1">Do you use cookies?</h3>
+                <v-checkbox
+                  v-model="policy.cookies"
+                  label="Yes, we do use cookies"
+                  color="blue"
+                  value="Other"
+                  hide-details
+                ></v-checkbox>
+                <div v-if="policy.cookies">
+                  <h3 class="pt-3 pa-1">Please specify the reasons:</h3>
+                  <v-text-field
+                    v-model="policy.cookiereason1"
+                    type="Policy cookie first reason"
+                    label="Policy cookie first reason"
+                    persistent-hint
+                    background-color="white"
+                    outlined
+                    required
+                    :rules="FieldRules"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="policy.cookiereason2"
+                    type="Policy cookie second reason"
+                    label="Policy cookie second reason"
+                    persistent-hint
+                    background-color="white"
+                    outlined
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="policy.cookiereason3"
+                    type="Policy cookie third reason"
+                    label="Policy cookie third reason"
+                    persistent-hint
+                    background-color="white"
+                    outlined
+                    required
+                  ></v-text-field>
+                </div>
+              </v-flex>
+            </v-col>
+          </v-row>
         </v-card>
 
         <v-btn color="primary" @click="e1 = 4"> Continue </v-btn>
@@ -330,7 +384,7 @@
       </v-stepper-content>
 
       <v-stepper-content step="4">
-        <v-card class="mb-12" color="grey lighten-4" height="550px">
+        <v-card class="mb-12" color="grey lighten-4" height="800px">
           <h2 class="pa-1 blue--text">Contact Details:</h2>
           <h3 class="pt-3 pa-1">How a user can contact you?</h3>
           <v-checkbox
@@ -340,13 +394,38 @@
             value="db"
             hide-details
           ></v-checkbox>
+          <div v-if="policy.th_email">
+            <h5 class="pt-3 pa-1">Please specify the email</h5>
+            <v-text-field
+              v-model="policy.th_email_d"
+              type="Email"
+              label="Email"
+              persistent-hint
+              background-color="white"
+              outlined
+              required
+              :rules="FieldRules"
+            ></v-text-field>
+          </div>
           <v-checkbox
             v-model="policy.th_phone"
             label="By phone"
             color="blue"
-            value="Other"
             hide-details
           ></v-checkbox>
+          <div v-if="policy.th_phone">
+            <h5 class="pt-3 pa-1">Please specify the phone</h5>
+            <v-text-field
+              v-model="policy.th_phone_d"
+              type="Phone"
+              label="Phone"
+              persistent-hint
+              background-color="white"
+              outlined
+              required
+              :rules="FieldRules"
+            ></v-text-field>
+          </div>
           <v-checkbox
             v-model="policy.th_mail"
             label="By post mail"
@@ -354,6 +433,19 @@
             value="Other"
             hide-details
           ></v-checkbox>
+          <div v-if="policy.th_mail">
+            <h5 class="pt-3 pa-1">Please specify the post address</h5>
+            <v-text-field
+              v-model="policy.th_mail_d"
+              type="mail"
+              label="mail"
+              persistent-hint
+              background-color="white"
+              outlined
+              required
+              :rules="FieldRules"
+            ></v-text-field>
+          </div>
           <v-checkbox
             v-model="policy.th_web"
             label="Through the website"
@@ -361,6 +453,26 @@
             value="Other"
             hide-details
           ></v-checkbox>
+          <v-checkbox
+            v-model="policy.th_other"
+            label="Other"
+            color="blue"
+            value="Other"
+            hide-details
+          ></v-checkbox>
+          <div v-if="policy.th_other">
+            <h5 class="pt-3 pa-1">Please specify other</h5>
+            <v-text-field
+              v-model="policy.th_other_d"
+              type="other"
+              label="other"
+              persistent-hint
+              background-color="white"
+              outlined
+              required
+              :rules="FieldRules"
+            ></v-text-field>
+          </div>
         </v-card>
 
         <v-dialog v-model="dialog" persistent max-width="600px">
@@ -462,8 +574,11 @@ export default {
       policy: {
         th_web: "",
         th_email: "",
+        th_email_d: "",
         th_mail: "",
+        th_mail_d: "",
         th_phone: "",
+        th_phone_d: "",
         first_name: "",
         last_name: "",
         zip: "",
@@ -489,14 +604,20 @@ export default {
         yes_ads: "",
         no_ads: "",
         yes_analytics: "",
+        cookiereason1: "",
+        cookiereason2: "",
+        cookiereason3: "",
         no_analytics: "",
         selectionEntity: "",
         previousSelectionEntity: "",
         selectedItemswhere: "",
         previousSelectionwhere: "",
         user: "",
+        th_other: "",
+        th_other_d: "",
         policyname: "",
         cookies: "",
+        otherspec: "",
         date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
           .toISOString()
           .substr(0, 10),
@@ -529,12 +650,20 @@ export default {
   methods: {
     setnull() {
       console.log("elias");
+      this.policy.th_other = "";
+      this.policy.th_other_d = "";
+      this.policy.cookiereason1 = "";
+      this.policy.cookiereason2 = "";
+      this.policy.cookiereason3 = "";
       this.policy.cookies = "";
       this.policy.id = "";
       this.policy.th_web = "";
       this.policy.th_email = "";
+      this.policy.th_email_d = "";
       this.policy.th_mail = "";
+      this.policy.th_mail_d = "";
       this.policy.th_phone = "";
+      this.policy.th_phone_d = "";
       this.policy.first_name = "";
       this.policy.last_name = "";
       this.policy.zip = "";
@@ -567,6 +696,7 @@ export default {
       this.policy.previousSelectionwhere = "";
       this.policy.user = "";
       this.policy.policyname = "";
+      this.policy.otherspec = "";
     },
 
     backtomenu() {

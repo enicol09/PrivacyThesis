@@ -217,15 +217,6 @@
                 Download Policy
               </v-btn>
 
-              <v-btn
-                class="ma-2 white--text"
-                rounded
-                color="primary"
-                @click="printSection"
-              >
-                Print Policy
-              </v-btn>
-
               <v-icon class="indigo--text" @click="editPolicie = false"
                 >mdi-close</v-icon
               >
